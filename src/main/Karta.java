@@ -1,7 +1,7 @@
 package main;
 
 public class Karta {
-	private String wartosc;
+	private Integer wartosc;
 	private String kolor;
 	
 	// Konstruktor - odwo³ania do setterów
@@ -10,29 +10,15 @@ public class Karta {
 		setKolor(numerKolor);
 	}
 	
-	public String getWartosc() {
+	public int getWartosc() {
 		return wartosc;
 	}
 	
 	// setter dla wartoœci - dla 11, 12 ,13 i 14 ustawia odpowiednio litery figur
 	public void setWartosc(Integer figureNumer) {
-		switch (figureNumer) {
-		case 11:
-			this.wartosc = "J";
-			break;
-		case 12:
-			this.wartosc = "Q";
-			break;
-		case 13:
-			this.wartosc = "K";
-			break;
-		case 14:
-			this.wartosc = "A";
-			break;
-		default: // dla ka¿dej innej zamieniam liczbê na Stringa i wstawiam do wartoœci
-			this.wartosc = figureNumer.toString();
-		}
+		this.wartosc = figureNumer;
 	}
+	
 	public String getKolor() {
 		return kolor;
 	}
@@ -58,7 +44,24 @@ public class Karta {
 	// przeci¹¿ona metoda toString z klasy Object zwraca sformatowane wartoœci w ci¹gu znaków
 	@Override
 	public String toString() {
-		return String.format("Karta - kolor [%s] - wartoœæ [%s]", this.kolor, this.wartosc);
+		String val = "";
+		switch (wartosc) {
+		case 11:
+			val = "J";
+			break;
+		case 12:
+			val = "Q";
+			break;
+		case 13:
+			val = "K";
+			break;
+		case 14:
+			val = "A";
+			break;
+		default: // dla ka¿dej innej zamieniam liczbê na Stringa i wstawiam do wartoœci
+			val = wartosc.toString();
+		}
+		return String.format("Karta - kolor [%s] - wartoœæ [%s]", this.kolor, val);
 	}
 	
 }

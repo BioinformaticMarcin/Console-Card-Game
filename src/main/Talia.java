@@ -23,8 +23,10 @@ public class Talia {
 	}
 	
 	// pobiera kolejny element talii
-	public void pobierz() {
-		System.out.println(karty.iterator().next().toString());
+	public Karta pobierz() {
+		Karta karta = karty.iterator().next();
+		karty.remove(karta);
+		return karta;
 	}
 	
 	// metoda pomocnicza do wyœwietlania wszystkich kart
