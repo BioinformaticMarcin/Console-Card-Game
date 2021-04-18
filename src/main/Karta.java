@@ -3,13 +3,29 @@ package main;
 public class Karta {
 	private Integer wartosc;
 	private String kolor;
+	private Integer value;
 	
 	// Konstruktor - odwo³ania do setterów
 	public Karta(int numerWartosc, int numerKolor) {
 		setWartosc(numerWartosc);
 		setKolor(numerKolor);
+		setValue(numerWartosc);
 	}
-	
+
+	public Integer getValue() {
+		return value;
+	}
+
+	public void setValue(Integer value) {
+		this.value = value;
+		if (value > 10) {
+			this.value = 10; // figury
+		} 
+		if (value == 14) {
+			this.value = 11; //As
+		}
+	}
+
 	public int getWartosc() {
 		return wartosc;
 	}
@@ -61,7 +77,7 @@ public class Karta {
 		default: // dla ka¿dej innej zamieniam liczbê na Stringa i wstawiam do wartoœci
 			val = wartosc.toString();
 		}
-		return String.format("Karta - kolor [%s] - wartoœæ [%s]", this.kolor, val);
+		return String.format("kolor [%s] - wartoœæ [%s]", this.kolor, val);
 	}
 	
 }
