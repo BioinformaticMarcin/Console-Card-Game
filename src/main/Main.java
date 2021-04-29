@@ -1,93 +1,61 @@
 package main;
 
-import player.Croupier;
-import player.Player;
+import java.util.Scanner;
 
-public class Main {
+public class Main extends Games{
 
-	private static Talia talia;
-	
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		
-		// Tworzenie nowej talii
-		talia = new Talia();
-		talia.tasuj();
-		
-		Player player = new Player();
-		player.addCard(talia.pobierz());
-		player.addCard(talia.pobierz());
-		System.out.println("Twoje karty:");
-		player.showCards();
-		
-		Croupier croupier = new Croupier();
-		croupier.addCard(talia.pobierz());
-		croupier.addCard(talia.pobierz());
-		System.out.println("Karty krupiera:");
-		croupier.showFirst();
-		
-		Boolean gameOn = Boolean.TRUE;
-		while (gameOn) {
-			switch (player.playerMove()) {
-			case "Hit":
-				addNextCard(player);
-				player.showCards();
-				croupier.showFirst();
-				break;
-			case "Stand":
-				gameOn = Boolean.FALSE;
-				System.out.println("Twoje karty:");
-				player.showCards();
-				System.out.println("Karty krupiera:");
-				croupier.showCards();
-				break;
-			case "Double":
-				System.out.println("Double Down");
-				addNextCard(player);
-				gameOn = Boolean.FALSE;
-				System.out.println("Twoje karty:");
-				player.showCards();
-				System.out.println("Karty krupiera:");
-				croupier.showCards();
+		main:while (true) {
+			Scanner scnr = new Scanner(System.in);
+			//Starting new game
+			while(true) {
+				System.out.println("W co chcesz zagraæ? [wpisz wybrany numer a nastêpnie naciœnij ENTER]");
+				System.out.println("1. Oczko");
+				System.out.println("2. BlackJack");
+				System.out.println("3. Wojnê");
+				
+				String option = scnr.nextLine();
+				switch (option.trim()) {
+				case "1":
+					oczko();
+					break;
+				case "2":
+					blackJack();
+					break;
+				case "3":
+					wojnaIntro();
+					break;
+				default:
+					System.out.println("Wpisz poprawn¹ wartoœæ!");
+					continue;
+				}
 				break;
 			}
-			
-			if (!player.areYouWinning) {
-				gameOn = Boolean.FALSE;
-				System.out.println("Karty krupiera:");
-				croupier.showCards();
-				System.out.println("You lose!");
-				return;
-			} 
-			if (!gameOn){
-				while(!croupier.endGame()) {
-					addNextCard(croupier);
-					System.out.println("Karty krupiera:");
-					croupier.showCards();
+			//Ending program
+			while(true) {
+				System.out.println("Chcesz zakoñczyæ program? [wpisz wybrany numer a nastêpnie naciœnij ENTER]");
+				System.out.println("1. Tak");
+				System.out.println("2. Nie");
+				
+				String option = scnr.nextLine();
+				switch (option.trim()) {
+				case "1":
+					break main;
+				case "2":
+					break;
+				default:
+					System.out.println("Wpisz poprawn¹ wartoœæ!");
+					continue;
 				}
-				Integer crouToBJDist = Math.abs(croupier.getPoints() - 21);
-				Integer crouToBJDistAs = Math.abs(croupier.getPointsAs() - 21);
-				Integer playToBJDist = Math.abs(player.getPoints() - 21);
-				Integer playToBJDistAs = Math.abs(player.getPointsAs() - 21);
-				
-				crouToBJDist = crouToBJDist < crouToBJDistAs ? crouToBJDist : crouToBJDistAs;
-				playToBJDist = playToBJDist < playToBJDistAs ? playToBJDist : playToBJDistAs;
-				
-				if (crouToBJDist < playToBJDist) {
-					System.out.println("You lose!");
-				} else {
-					System.out.println("You win!");
-				}
-				
+				break;
 			}
 		}
+		System.out.println("Koniec programu");
+		return;
 	}
 	
-	public static void addNextCard (Player player) {
-		Karta karta = talia.pobierz();
-		System.out.println("------------------------------------");
-		System.out.println("Pobrana karta: " + karta.toString());
-		player.addCard(karta);
-		System.out.println("------------------------------------");
-	}
+
 	
 }

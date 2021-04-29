@@ -35,4 +35,8 @@ public class Talia {
 			System.out.println(karta.toString());
 		}
 	}
+	
+	public ArrayList<Karta> getAllCards() {
+		return karty;
+	}
 }

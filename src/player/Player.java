@@ -33,6 +33,10 @@ public class Player {
 		return pointsWithAs;
 	}
 	
+	public void justAddCard(Karta karta) {
+		actualCards.add(karta);
+	}
+	
 	public void addCard(Karta karta) {
 		actualCards.add(karta);
 		points += karta.getValue();
@@ -59,6 +63,7 @@ public class Player {
 		System.out.println("------------------------------------");
 	}
 	
+	@SuppressWarnings("resource")
 	public String playerMove() {
 		Scanner scnr = new Scanner(System.in);
 		while (true) {
